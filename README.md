@@ -6,11 +6,19 @@ This repository contains the projects I have done during my training at 42 Paris
 
 ## Projects
 
-- [Libft](
-- [Get_Next_Line](
+### Libft
+
+The aim of this project is to code a C library regrouping usual functions that I will be allowed to use in all my other projects.
+
+### get_next_line
+
+The aim of this project is to code a function that returns a line ending with a newline, read from a file descriptor.
+
+### ft_printf
+
+The aim of this project is to recode the printf function from the C standard library.
 
 ## Author
 
-- [Maxime Cauchy](
 - [42 Profile](https://profile.intra.42.fr/users/mcauchy)
 
