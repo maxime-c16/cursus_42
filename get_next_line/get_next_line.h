@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:47:41 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/10 18:52:26 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:45:23 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*get_next_line(int fd);
 
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *str);
-char	*ft_strchr(const char *s, char c);
 
 int		ft_strlen(char *str);
+int		has_newline(char *str);
 
 #endif

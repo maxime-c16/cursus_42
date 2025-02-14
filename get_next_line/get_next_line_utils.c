@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:00:24 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/10 18:52:19 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:47:23 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ char	*ft_strdup(char *str)
 	int		i;
 
 	i = 0;
-	if (!str)
+	if (!str || !*str)
 		return (NULL);
 	while (str[i])
 		i++;
-	copy = malloc(i + 1);
-	if (!copy || !str)
+	copy = (char *)malloc(sizeof(char) * (i + 1));
+	if (!copy)
 		return (NULL);
 	i = 0;
 	while (str[i])
@@ -45,23 +45,20 @@ char	*ft_strdup(char *str)
 	return (copy);
 }
 
-char	*ft_strchr(const char *s, char c)
+int	has_newline(char *str)
 {
-	char	*ptr;
-	int		i;
+	int	i;
 
 	i = 0;
-	ptr = (char *)s;
-	while (ptr[i])
+	if (!str)
+		return (-1);
+	while (str[i])
 	{
-		if (ptr[i] == c)
-			return (ptr + i);
+		if (str[i] == '\n')
+			return (i);
 		i++;
 	}
-	if (c == '\0')
-		return (ptr + i);
-	else
-		return (NULL);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -70,7 +67,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!s1)
+		return (ft_strdup(s2));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

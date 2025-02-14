@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:53:17 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/10 19:07:17 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:43:36 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,62 +30,71 @@ char	*ft_substr(char *str, int start, int len)
 	return (substr);
 }
 
-char	*get_next_line(int fd)
+char	*read_line(int fd, char *line)
 {
-	static char	*line = NULL;
-	int			ret;
-	char		buffer[BUFFER_SIZE];
-	char		*temp;
+	char	buffer[BUFFER_SIZE + 1];
+	int		bytes_read;
+	char	*temp;
 
-	ret = read(fd, buffer, BUFFER_SIZE);
-	if (ret == -1)
-		return (NULL);
-	line = ft_strdup(buffer);
-	while (!ft_strchr(line, '\n') && ret > 0)
+	bytes_read = 1;
+	while (bytes_read > 0 && has_newline(line) == -1)
 	{
-		ret = read(fd, buffer, BUFFER_SIZE);
-		if (ret < 0)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0 || (bytes_read == 0 && !line))
 		{
 			free(line);
 			return (NULL);
 		}
-		temp = ft_strdup(line);
-		if (!temp)
-		{
-			free(line);
-			return (NULL);
-		}
-		free(line);
-		line = ft_strjoin(temp, buffer);
-		free(temp);
-	}
-	if (ret == 0)
-	{
-		temp = ft_strdup(line);
+		buffer[bytes_read] = '\0';
+		temp = ft_strjoin(line, buffer);
 		free(line);
 		line = ft_strdup(temp);
 		free(temp);
 	}
-	
+	return (line);
 }
 
-// int	main(int ac, char **av)
-// {
-// 	int		fd;
-// 	char	*line;
+char	*get_next_line(int fd)
+{
+	static char	*line = NULL;
+	char		*str;
+	char		*temp;
 
-// 	if (ac != 2)
-// 		return (1);
-// 	fd = open(av[1], O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = read_line(fd, line);
+	if (!line)
+		return (NULL);
+	str = ft_substr(line, 0, has_newline(line) + 1);
+	temp = ft_strdup(line + has_newline(line) + 1);
+	if (!str || !temp)
+	{
+		free(line);
+		return (NULL);
+	}
+	free(line);
+	line = ft_strdup(temp);
+	free(temp);
+	return (str);
+}
+
+int	main(int ac, char **av)
+{
+	int		fd;
+	char	*line;
+
+	if (ac != 2)
+		return (1);
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+		return (1);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
+}
