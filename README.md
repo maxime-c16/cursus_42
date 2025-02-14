@@ -17,6 +17,11 @@ The aim of this project is to code a function that returns a line ending with a 
 ### ft_printf
 
 The aim of this project is to recode the printf function from the C standard library.
+- The prototype of ft_printf is `int ft_printf(const char *, ...);`
+- It must not do the buffer management like the real printf
+- It must manage the following conversions: `cspdiuxX%`
+
+
 
 ## Author
 
