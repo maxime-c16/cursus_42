@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:00:24 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/14 16:47:23 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/14 17:32:39 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	has_newline(char *str)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:53:17 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/14 16:43:36 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/14 17:38:25 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ char	*ft_substr(char *str, int start, int len)
 	char	*substr;
 	int		i;
 
+	if (!str || !*str)
+		return (NULL);
 	substr = malloc(len + 1);
-	if (!substr || !str)
+	if (!substr)
 		return (NULL);
 	i = 0;
 	while (i < len && str[start + i])
@@ -37,7 +39,7 @@ char	*read_line(int fd, char *line)
 	char	*temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0 && has_newline(line) == -1)
+	while (bytes_read > 0 && has_newline(line) < 1)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0 || (bytes_read == 0 && !line))
@@ -50,6 +52,11 @@ char	*read_line(int fd, char *line)
 		free(line);
 		line = ft_strdup(temp);
 		free(temp);
+	}
+	if (bytes_read == 0 && !line)
+	{
+		free(line);
+		return (NULL);
 	}
 	return (line);
 }
@@ -66,15 +73,18 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (NULL);
 	str = ft_substr(line, 0, has_newline(line) + 1);
-	temp = ft_strdup(line + has_newline(line) + 1);
-	if (!str || !temp)
+	if (!str && line && line[0] != '\0')
 	{
+		str = ft_strdup(line);
 		free(line);
-		return (NULL);
 	}
-	free(line);
-	line = ft_strdup(temp);
-	free(temp);
+	else
+	{
+		temp = ft_strdup(line + has_newline(line) + 1);
+		free(line);
+		line = ft_strdup(temp);
+		free(temp);
+	}
 	return (str);
 }
 
