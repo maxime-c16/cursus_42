@@ -6,11 +6,11 @@
 #    By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/16 10:34:13 by mcauchy           #+#    #+#              #
-#    Updated: 2025/02/16 11:45:37 by mcauchy          ###   ########.fr        #
+#    Updated: 2025/02/16 12:22:14 by mcauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES	=	push_swap.c singleton.c parsing.c free.c
+FILES	=	push_swap.c singleton.c parsing.c free.c insertion.c
 
 SRC_DIR	=	srcs
 
@@ -24,7 +24,7 @@ NAME	=	push_swap
 
 CC		=	gcc
 
-CFLAGS	=	
+CFLAGS	=
 
 DEBUG	=	-g3 -fsanitize=address
 

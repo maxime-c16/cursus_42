@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:12:12 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/16 12:04:36 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:41:18 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ static void	check_input(char **tab)
 void	single_parser(char *line)
 {
 	char	**tab;
-	t_list	*lst;
 
 	tab = ft_split(line, ' ');
 	check_input(tab);
+	insert_list(tab);
+	print_list();
 }
 
 void	multiple_parser(char **av, int ac)
