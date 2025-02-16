@@ -6,7 +6,7 @@
 #    By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/16 10:34:13 by mcauchy           #+#    #+#              #
-#    Updated: 2025/02/16 12:22:14 by mcauchy          ###   ########.fr        #
+#    Updated: 2025/02/16 13:34:31 by mcauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ NAME	=	push_swap
 
 CC		=	gcc
 
-CFLAGS	=
+CFLAGS	=	-g3
 
-DEBUG	=	-g3 -fsanitize=address
+DEBUG	=	-fsanitize=address
 
 RM		=	/bin/rm -rf
 
