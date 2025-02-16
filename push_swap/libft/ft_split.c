@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:29:56 by mcauchy           #+#    #+#             */
-/*   Updated: 2025/02/10 12:31:50 by mcauchy          ###   ########.fr       */
+/*   Updated: 2025/02/16 13:36:24 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ char	**ft_split(const char *s, char c)
 
 	i = 0;
 	size = ft_wrdcnt((char *)s, c);
-	str = malloc(sizeof(char *) * (size + 1));
-	if (str == NULL)
+	str = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!str)
 		return (NULL);
 	while (i < size)
 	{
